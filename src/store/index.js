@@ -36,7 +36,7 @@ export default new Vuex.Store({
         sessionStorage.setItem('currentConnected', JSON.stringify(addr))
         if(!state.recentConnected.some(address=>address===addr)){// 如果当前连接的地址不在最近连接列表中
           const recentConnected = JSON.parse(localStorage.getItem('recentConnected')) || []
-          state.recentConnected = [...recentConnected, addr]// 放入当前数据库连接地址
+          state.recentConnected = [...recentConnected, addr.replace(/(?<=.*:\/\/.*:).*(?=@.*:.*\/.*)/, '******')]// 放入当前数据库连接地址
           localStorage.setItem('recentConnected', JSON.stringify(state.recentConnected))
         }
       }
