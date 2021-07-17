@@ -34,9 +34,10 @@ export default new Vuex.Store({
       }else{
         state.currentConnected = addr// 设置当前数据库连接地址
         sessionStorage.setItem('currentConnected', JSON.stringify(addr))
-        if(!state.recentConnected.some(address=>address===addr)){// 如果当前连接的地址不在最近连接列表中
+        const nopasswordAddr = addr.replace(/(?<=.*:\/\/.*:).*(?=@.*:.*\/.*)/, '******')
+        if(!state.recentConnected.some(address=>address===nopasswordAddr)){// 如果当前连接的地址不在最近连接列表中
           const recentConnected = JSON.parse(localStorage.getItem('recentConnected')) || []
-          state.recentConnected = [...recentConnected, addr.replace(/(?<=.*:\/\/.*:).*(?=@.*:.*\/.*)/, '******')]// 放入当前数据库连接地址
+          state.recentConnected = [...recentConnected, nopasswordAddr]// 放入当前数据库连接地址
           localStorage.setItem('recentConnected', JSON.stringify(state.recentConnected))
         }
       }
