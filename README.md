@@ -18,3 +18,5 @@
 ![image](https://user-images.githubusercontent.com/49555245/126039676-bcf489ca-9376-4e6c-908a-8477f48c14ee.png)
 ![image](https://user-images.githubusercontent.com/49555245/126039694-eb40d78f-4a9a-46f0-8878-480f57182af8.png)
 ### 4.输入查询语句
+![image](https://user-images.githubusercontent.com/49555245/126054810-fe4b6246-08e6-4427-b228-88966db0aeb2.png)
+![image](https://user-images.githubusercontent.com/49555245/126054833-1d7facd3-b0d3-40ba-9bbb-37ba31226749.png)
