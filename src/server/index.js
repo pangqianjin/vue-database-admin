@@ -38,16 +38,21 @@ app.post('/query', (req, res)=>{// {err | result}
                 res.send({err, result:null})
                 console.log('connect err: not connected')
             }
-
-            client.query(req.body.queryString, (err, response)=>{
-                if(err){
-                    res.send({err, result:null})
-                    console.log('query err', err)
-                }
-
-                res.send({err: null, result: response})
-                console.log('query result:', response)
-            })
+            try{
+                client.query(req.body.queryString, (err, response)=>{
+                    if(err){
+                        res.send({err, result:null})
+                        console.log('query err', err)
+                        return
+                    }
+    
+                    res.send({err: null, result: response})
+                    console.log('query result:', response)
+                })
+            }catch(err){
+                res.send({err, result: null})
+                console.log('query err', err)
+            }
         })
     }
 })

@@ -5,7 +5,10 @@
             <el-col :span="2" :offset="1"><el-button @click="save">保存</el-button></el-col>
             <el-col :span="2" :offset="1"><el-button @click="run">运行</el-button></el-col>
         </el-row><br/>
-        <el-input class="textarea" v-model="value" placeholder="输入查询语句" type="textarea" :rows="20"></el-input>
+        <div class="container">
+            <el-input class="textarea" v-model="value" placeholder="输入查询语句" type="textarea" :rows="20"></el-input>
+            <router-view class="result"></router-view>
+        </div>
     </div>
 </template>
 
@@ -31,13 +34,27 @@ export default {
         },
         run(){
             this.query({queryString: this.value})
+            setTimeout(()=>{
+                if(this.$route.path!=='/connected/result'){
+                    this.$router.replace('/connected/result')
+                }
+            }, 1000)
         }
     }
 }
 </script>
 
 <style scoped>
+    .container{
+        display: flex;
+    }
+
     .textarea{
+        width: 40%;
+    }
+
+    .result{
         width: 50%;
+        padding: 2em;
     }
 </style>

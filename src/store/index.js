@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import {connectPg, disconnectPg, queryPg} from '../utils'
+import {connectPg, queryPg} from '../utils'
 
 Vue.use(Vuex)
 
@@ -9,7 +9,7 @@ export default new Vuex.Store({
     currentConnected: '',//当前正在连接的数据库地址
     recentConnected: [],// 最近连接过的数据库地址
     err: '',
-    result: []
+    result: {fields: [], rows: []}
   },
   getters: {
     currentConnected: state=>state.currentConnected || sessionStorage.getItem('currentConnected'),//当前正在连接的数据库地址
@@ -42,15 +42,15 @@ export default new Vuex.Store({
         }
       }
     },
-    query(state, {queryString}){
+    async query(state, {queryString}){
       state.err = ''
-      const result = queryPg(queryString)
-      console.log(result)
-      // if(err){
-      //   state.err = err
-      // }else{
-      //   state.result = result
-      // }
+      const response= await queryPg(queryString)
+      
+      if(response.err){
+        state.err = response.err
+      }else{
+        state.result = response.result.result
+      }
     }
   },
   actions: {
